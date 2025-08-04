@@ -1,0 +1,114 @@
+---
+title: "Map"
+format: html
+execute:
+    echo: false
+    message: false
+    warning: false
+---
+
+```{r}
+library(tidyverse)
+
+# Unzip all files to a folder
+unzip("archive.zip", exdir = "unzipped_data")
+
+# Load the main housing dataset
+library(readr)
+housing <- read_csv("unzipped_data/california_housing_updated.csv")
+
+
+library(dplyr)
+library(ggplot2)
+
+housing_clean <- housing %>%
+  filter(
+    average_household_income > 0 & average_household_income < 150000,
+    median_house_value > 0 & median_house_value < 2000000
+  )
+
+```
+
+
+```{r}
+library(ggplot2)
+library(scales)
+
+ggplot(housing, aes(x = longitude, y = latitude, color = median_house_value)) +
+  geom_point(alpha = 0.6, size = 1.2) +
+  scale_color_viridis_c(
+    option = "plasma",
+    trans = "log",
+    labels = label_dollar(scale = 1e-6, suffix = "M")
+  ) +
+  labs(
+    title = "House Values Across California",
+    subtitle = "Higher values cluster near the coast and Bay Area",
+    x = "Longitude",
+    y = "Latitude",
+    color = "Median House Value"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(size = 12),
+    legend.position = "right"
+  )
+
+```
+
+This static map visualizes median house values across California using geographic coordinates. Each point represents a housing location, colored according to its median house value. A logarithmic color scale highlights variations more effectively, making clusters of high-value properties along the coast and the Bay Area more prominent. The visualization clearly shows that coastal regions, especially around San Francisco and Los Angeles, command significantly higher housing prices, emphasizing the geographic disparity in real estate valuation.
+
+
+
+```{r}
+library(tidyverse)
+library(readr)
+library(leaflet)
+
+# Load housing data
+housing <- read_csv("unzipped_data/california_housing_updated.csv")
+
+# Filter + sample for performance
+housing_small <- housing %>%
+  filter(
+    !is.na(latitude),
+    !is.na(longitude),
+    median_house_value > 0
+  ) %>%
+  slice_sample(n = 2000)  # Adjust as needed
+
+# Add popup text
+housing_small <- housing_small %>%
+  mutate(popup = paste0(
+    "<b>", name, "</b><br>",
+    "Median Value: $", formatC(median_house_value, big.mark = ","),
+    "<br>Income: $", formatC(average_household_income, big.mark = ",")
+  ))
+
+# Build leaflet map
+leaflet(housing_small) %>%
+  addProviderTiles(providers$Esri.WorldTopoMap) %>%  # Or use Esri.WorldImagery for satellite
+  setView(lng = -119.4179, lat = 36.7783, zoom = 6) %>%  # Center on California
+  addCircleMarkers(
+    lng = ~longitude,
+    lat = ~latitude,
+    radius = 5,
+    fillOpacity = 0.6,
+    color = ~colorQuantile("YlOrRd", median_house_value)(median_house_value),
+    stroke = FALSE,
+    popup = ~popup
+  ) %>%
+  addLegend(
+    "bottomright",
+    pal = colorQuantile("YlOrRd", housing_small$median_house_value),
+    values = ~median_house_value,
+    title = "House Value",
+    labFormat = labelFormat(prefix = "$"),
+    opacity = 1
+  )
+
+```
+
+This interactive Leaflet map allows users to explore housing data across California dynamically. It samples 2,000 housing locations for performance and displays each one as a circle marker, color-coded by house value. Hovering or clicking reveals detailed popups with neighborhood names, median house values, and average household incomes. The map provides an intuitive, zoomable view of spatial trends in housing, making it easy to identify high-value clusters and compare different regions interactively.
+

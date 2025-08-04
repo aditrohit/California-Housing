@@ -1,0 +1,64 @@
+---
+title: "Ocean Proximity"
+format: html
+execute:
+    echo: false
+    message: false
+    warning: false
+---
+
+```{r}
+library(tidyverse)
+
+# Unzip all files to a folder
+unzip("archive.zip", exdir = "unzipped_data")
+
+# Load the main housing dataset
+library(readr)
+housing <- read_csv("unzipped_data/california_housing_updated.csv")
+
+
+library(dplyr)
+library(ggplot2)
+
+housing_clean <- housing %>%
+  filter(
+    average_household_income > 0 & average_household_income < 150000,
+    median_house_value > 0 & median_house_value < 2000000
+  )
+
+```
+
+```{r}
+# Reorder ocean proximity by median house value
+housing_clean$ocean_proximity <- reorder(
+  housing_clean$ocean_proximity,
+  housing_clean$median_house_value,
+  FUN = median
+)
+
+ggplot(housing_clean, aes(x = ocean_proximity, y = median_house_value)) +
+  geom_boxplot(fill = "#3182bd", color = "gray20", outlier.shape = NA, alpha = 0.7) +
+  geom_jitter(width = 0.2, alpha = 0.1, color = "black", size = 0.7) +
+  labs(
+    title = "House Prices by Ocean Proximity",
+    x = "Ocean Proximity",
+    y = "Median House Value"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16, hjust = 0.5),
+    axis.text.x = element_text(angle = 20, vjust = 1, hjust = 1)
+  )
+
+
+
+```
+
+This boxplot explores how proximity to the ocean affects median house values in California. Properties are grouped into categories like "Near Bay", "Inland", and "Near Ocean", with the boxes showing the distribution of house prices within each group. As expected, homes closer to the coast—particularly those "Near Bay" or "Near Ocean"—tend to have higher median values, while inland homes are generally more affordable. The jittered points overlay adds a layer of raw data visibility, confirming that coastal proximity correlates strongly with elevated housing prices.
+
+
+
+![](house_value_vs_age.gif)
+
+The animation illustrates how median house value changes in relation to the average age of houses, evolving over different levels of ocean proximity or income bands (depending on how the animation was constructed). As the frames shift, patterns emerge showing how newer or older developments in various regions align with housing costs. The motion highlights trends over time or across categories, providing dynamic insight that complements the static graphs.

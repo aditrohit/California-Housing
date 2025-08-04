@@ -1,0 +1,8 @@
+---
+title: "Sources"
+format: html
+---
+
+**Data Source:** The housing data used in these visualizations was sourced from Kaggle’s California Housing Prices dataset which includes demographic and real estate information for California districts.
+
+**Visualization Tools:** Graphs and maps were created using R with the tidyverse, ggplot2, and leaflet packages to deliver clear, interactive, and informative visual representations of California housing trends.

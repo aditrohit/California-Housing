@@ -1,0 +1,45 @@
+---
+title: "California Housing"
+format: html
+execute:
+    echo: false
+    message: false
+    warning: false
+---
+
+This project explores California’s housing market using a cleaned dataset containing neighborhood-level statistics on income, home values, and geographic location. Through interactive and static visualizations, it examines how factors like average household income, proximity to the ocean, and geographic coordinates relate to median house prices. The analysis uses R and visualization tools like ggplot2 and Leaflet to uncover spatial and economic patterns, offering insights into the forces shaping housing affordability and regional disparities across California.
+
+```{r}
+
+library(tidyverse)
+
+# Unzip all files to a folder
+unzip("archive.zip", exdir = "unzipped_data")
+
+# Load the main housing dataset
+library(readr)
+housing <- read_csv("unzipped_data/california_housing_updated.csv")
+
+
+library(dplyr)
+library(ggplot2)
+
+housing_clean <- housing %>%
+  filter(
+    average_household_income > 0 & average_household_income < 150000,
+    median_house_value > 0 & median_house_value < 2000000
+  )
+
+ggplot(housing_clean, aes(x = average_household_income, y = median_house_value)) +
+  geom_point(alpha = 0.4, color = "darkorange") +
+  labs(
+    title = "California Housing: Value vs. Household Income",
+    x = "Average Household Income",
+    y = "Median House Value"
+  ) +
+  theme_minimal()
+
+
+```
+
+This scatter plot visualizes the relationship between average household income and median house value across California. Each point represents a housing block, with orange markers indicating individual observations. The graph reveals a positive correlation—areas with higher household incomes generally tend to have higher median house values. However, the spread in values also suggests that income alone does not fully explain housing prices, pointing to other influential factors such as location, proximity to urban centers, or coastal access. This visualization helps highlight the economic diversity and housing market disparities within the state.
