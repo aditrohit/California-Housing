@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "Ocean_Proximity.html",
+    "href": "Ocean_Proximity.html",
+    "title": "Ocean Proximity",
+    "section": "",
+    "text": "This boxplot explores how proximity to the ocean affects median house values in California. Properties are grouped into categories like “Near Bay”, “Inland”, and “Near Ocean”, with the boxes showing the distribution of house prices within each group. As expected, homes closer to the coast—particularly those “Near Bay” or “Near Ocean”—tend to have higher median values, while inland homes are generally more affordable. The jittered points overlay adds a layer of raw data visibility, confirming that coastal proximity correlates strongly with elevated housing prices.\n\nThe animation illustrates how median house value changes in relation to the average age of houses, evolving over different levels of ocean proximity or income bands (depending on how the animation was constructed). As the frames shift, patterns emerge showing how newer or older developments in various regions align with housing costs. The motion highlights trends over time or across categories, providing dynamic insight that complements the static graphs."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "California Housing",
+    "section": "",
+    "text": "This project explores California’s housing market using a cleaned dataset containing neighborhood-level statistics on income, home values, and geographic location. Through interactive and static visualizations, it examines how factors like average household income, proximity to the ocean, and geographic coordinates relate to median house prices. The analysis uses R and visualization tools like ggplot2 and Leaflet to uncover spatial and economic patterns, offering insights into the forces shaping housing affordability and regional disparities across California.\n\n\n\n\n\n\n\n\n\nThis scatter plot visualizes the relationship between average household income and median house value across California. Each point represents a housing block, with orange markers indicating individual observations. The graph reveals a positive correlation—areas with higher household incomes generally tend to have higher median house values. However, the spread in values also suggests that income alone does not fully explain housing prices, pointing to other influential factors such as location, proximity to urban centers, or coastal access. This visualization helps highlight the economic diversity and housing market disparities within the state."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "My name is Adit Rohit and I am a rising freshman at Eastlake Highschool. Contact me at rohitkadit@gmail.com. My Github account can be visited here.\nThe repository for this project can be found here.\nThis project was created as part of Kane’s Data Science Bootcamp."
+  },
+  {
+    "objectID": "Map.html",
+    "href": "Map.html",
+    "title": "Map",
+    "section": "",
+    "text": "This static map visualizes median house values across California using geographic coordinates. Each point represents a housing location, colored according to its median house value. A logarithmic color scale highlights variations more effectively, making clusters of high-value properties along the coast and the Bay Area more prominent. The visualization clearly shows that coastal regions, especially around San Francisco and Los Angeles, command significantly higher housing prices, emphasizing the geographic disparity in real estate valuation.\n\n\n\n\n\n\nThis interactive Leaflet map allows users to explore housing data across California dynamically. It samples 2,000 housing locations for performance and displays each one as a circle marker, color-coded by house value. Hovering or clicking reveals detailed popups with neighborhood names, median house values, and average household incomes. The map provides an intuitive, zoomable view of spatial trends in housing, making it easy to identify high-value clusters and compare different regions interactively."
+  }
+]
