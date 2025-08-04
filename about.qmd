@@ -5,4 +5,4 @@ My name is Adit Rohit and I am a rising freshman at Eastlake Highschool. Contact
 
 The repository for this project can be found [here](https://github.com/aditrohit/California-Housing).
 
-This project was created as part of Kane’s Data Science Bootcamp.
+This project was created as part of [Kane’s Data Science Bootcamp](https://bootcamp.davidkane.info/).
