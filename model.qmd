@@ -11,26 +11,124 @@ execute:
 ```{r}
 library(tidyverse)
 
-# Unzip and load
+# Unzip and load the data
 unzip("archive.zip", exdir = "unzipped_data")
 housing <- read_csv("unzipped_data/california_housing_updated.csv")
 
-# Clean
+# Clean and filter data
 housing_clean <- housing %>%
   filter(
     average_household_income > 0 & average_household_income < 150000,
     median_house_value > 0 & median_house_value < 2000000
-  )
-
-# Make ocean proximity a factor with reference level "<1H OCEAN"
-housing_clean <- housing_clean %>%
+  ) %>%
   mutate(ocean_proximity = relevel(factor(ocean_proximity), ref = "<1H OCEAN"))
 
-# Linear regression model
+# Fit linear regression model
 model <- lm(median_house_value ~ average_household_income + average_house_age + ocean_proximity, data = housing_clean)
 
-# Summary
+# Show summary
 summary(model)
+```
+
+---
+
+## Final Regression Equation
+
+The fitted linear model is:
+
+$$
+\text{HouseValue} =
+-334{,}429.74
++ 7.00 \cdot \text{Income}
++ 10{,}664.29 \cdot \text{Age}
+- 64{,}580.69 \cdot \text{Inland}
++ 128{,}444.13 \cdot \text{NearBay}
++ 32{,}864.60 \cdot \text{NearOcean}
+$$
+
+Where:
+- `Income` = average household income (in dollars)  
+- `Age` = average house age (in years)  
+- `Inland`, `NearBay`, and `NearOcean` are binary variables:  
+  - 1 if the house is in that region, else 0  
+  - The baseline is `<1H OCEAN`
+
+---
+
+## Example Prediction
+
+Suppose a house has:
+- Income = $90,000  
+- Age = 30 years  
+- Ocean proximity = "NEAR BAY" (i.e., `NearBay = 1`)
+
+Then:
+
+$$
+\text{HouseValue} =
+-334{,}429.74 + (7.00 \cdot 90{,}000) + (10{,}664.29 \cdot 30) + 128{,}444.13
+= 1{,}191{,}701.59
+$$
+
+---
+
+## Interpretation
+
+- Every $1 increase in income → +$7 in house value  
+- Every additional year of age → +$10,664.29 in value  
+- Compared to `<1H OCEAN`:
+  - `INLAND` homes are worth ~$64.6K less  
+  - `NEAR BAY` homes are worth ~$128.4K more  
+  - `NEAR OCEAN` homes are worth ~$32.8K more  
+
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(plotly)
+
+# Load and clean data
+unzip("archive.zip", exdir = "unzipped_data")
+housing <- read_csv("unzipped_data/california_housing_updated.csv")
+
+housing_clean <- housing %>%
+  filter(
+    average_household_income > 0 & average_household_income < 150000,
+    median_house_value > 0 & median_house_value < 2000000
+  ) %>%
+  mutate(ocean_proximity = relevel(factor(ocean_proximity), ref = "<1H OCEAN"))
+
+# Fit 3-variable model
+model <- lm(median_house_value ~ average_household_income + average_house_age + ocean_proximity, data = housing_clean)
+
+# Predict values
+housing_clean <- housing_clean %>%
+  mutate(predicted_value = predict(model, newdata = housing_clean))
+
+# 3D plot
+plot_ly(
+  data = housing_clean,
+  x = ~average_household_income,
+  y = ~average_house_age,
+  z = ~predicted_value,
+  color = ~ocean_proximity,
+  colors = c("orange", "red", "blue", "green"),
+  type = "scatter3d",
+  mode = "markers",
+  marker = list(size = 2)
+) %>%
+  layout(
+    scene = list(
+      xaxis = list(title = "Income"),
+      yaxis = list(title = "House Age"),
+      zaxis = list(title = "Predicted House Value")
+    ),
+    title = "3D Prediction Surface: Income, Age, Ocean Proximity"
+  )
 
 ```
 

@@ -33,5 +33,40 @@
     "title": "Ocean Proximity",
     "section": "",
     "text": "This boxplot explores how proximity to the ocean affects median house values in California. Properties are grouped into categories like “Near Bay”, “Inland”, and “Near Ocean”, with the boxes showing the distribution of house prices within each group. As expected, homes closer to the coast—particularly those “Near Bay” or “Near Ocean”—tend to have higher median values, while inland homes are generally more affordable. The jittered points overlay adds a layer of raw data visibility, confirming that coastal proximity correlates strongly with elevated housing prices.\n\nThe animation illustrates how median house value changes in relation to the average age of houses, evolving over different levels of ocean proximity or income bands (depending on how the animation was constructed). As the frames shift, patterns emerge showing how newer or older developments in various regions align with housing costs. The motion highlights trends over time or across categories, providing dynamic insight that complements the static graphs."
+  },
+  {
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "Model",
+    "section": "",
+    "text": "Call:\nlm(formula = median_house_value ~ average_household_income + \n    average_house_age + ocean_proximity, data = housing_clean)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-721614 -139275  -34274   92332 1458432 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)               -3.344e+05  9.244e+03 -36.180  &lt; 2e-16 ***\naverage_household_income   6.998e+00  5.602e-02 124.919  &lt; 2e-16 ***\naverage_house_age          1.066e+04  2.141e+02  49.818  &lt; 2e-16 ***\nocean_proximityINLAND     -6.458e+04  3.782e+03 -17.076  &lt; 2e-16 ***\nocean_proximityNEAR BAY    1.284e+05  6.397e+03  20.080  &lt; 2e-16 ***\nocean_proximityNEAR OCEAN  3.286e+04  4.977e+03   6.603 4.13e-11 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 221800 on 21429 degrees of freedom\nMultiple R-squared:  0.5083,    Adjusted R-squared:  0.5082 \nF-statistic:  4431 on 5 and 21429 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "model.html#final-regression-equation",
+    "href": "model.html#final-regression-equation",
+    "title": "Model",
+    "section": "Final Regression Equation",
+    "text": "Final Regression Equation\nThe fitted linear model is:\n\\[\n\\text{HouseValue} =\n-334{,}429.74\n+ 7.00 \\cdot \\text{Income}\n+ 10{,}664.29 \\cdot \\text{Age}\n- 64{,}580.69 \\cdot \\text{Inland}\n+ 128{,}444.13 \\cdot \\text{NearBay}\n+ 32{,}864.60 \\cdot \\text{NearOcean}\n\\]\nWhere: - Income = average_household_income (in dollars)\n- Age = average_house_age (in years)\n- Inland, NearBay, and NearOcean are binary variables:\n- 1 if the house is in that region, else 0\n- The baseline is &lt;1H OCEAN"
+  },
+  {
+    "objectID": "model.html#example-prediction",
+    "href": "model.html#example-prediction",
+    "title": "Model",
+    "section": "Example Prediction",
+    "text": "Example Prediction\nSuppose a house has: - Income = $90,000\n- Age = 30 years\n- Ocean proximity = “NEAR BAY” (i.e., NearBay = 1)\nThen:\n\\[\n\\text{HouseValue} =\n-334{,}429.74 + (7.00 \\cdot 90{,}000) + (10{,}664.29 \\cdot 30) + 128{,}444.13\n= 1{,}191{,}701.59\n\\]"
+  },
+  {
+    "objectID": "model.html#interpretation",
+    "href": "model.html#interpretation",
+    "title": "Model",
+    "section": "Interpretation",
+    "text": "Interpretation\n\nEvery $1 increase in income → +$7 in house value\n\nEvery additional year of age → +$10,664.29 in value\n\nCompared to &lt;1H OCEAN:\n\nINLAND homes are worth ~$64.6K less\n\nNEAR BAY homes are worth ~$128.4K more\n\nNEAR OCEAN homes are worth ~$32.8K more"
+  },
+  {
+    "objectID": "model.html#limitations",
+    "href": "model.html#limitations",
+    "title": "Model",
+    "section": "Limitations",
+    "text": "Limitations\n\nModel only includes three predictors\n\nR² is modest → use for rough estimation only\n\nAdding variables (e.g., total rooms, location coordinates) may improve accuracy\n\n\n`"
   }
 ]
