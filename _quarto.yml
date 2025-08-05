@@ -11,6 +11,8 @@ website:
         text: Ocean Proximity
       - href: Map.qmd
         text: Map
+      - href: model.qmd
+        text: Model
       - href: Sources.qmd
         text: Sources
       - href: about.qmd

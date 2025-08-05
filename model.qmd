@@ -1,0 +1,36 @@
+---
+title: "Model"
+format: html
+execute:
+    echo: false
+    message: false
+    warning: false
+---
+
+
+```{r}
+library(tidyverse)
+
+# Unzip and load
+unzip("archive.zip", exdir = "unzipped_data")
+housing <- read_csv("unzipped_data/california_housing_updated.csv")
+
+# Clean
+housing_clean <- housing %>%
+  filter(
+    average_household_income > 0 & average_household_income < 150000,
+    median_house_value > 0 & median_house_value < 2000000
+  )
+
+# Make ocean proximity a factor with reference level "<1H OCEAN"
+housing_clean <- housing_clean %>%
+  mutate(ocean_proximity = relevel(factor(ocean_proximity), ref = "<1H OCEAN"))
+
+# Linear regression model
+model <- lm(median_house_value ~ average_household_income + average_house_age + ocean_proximity, data = housing_clean)
+
+# Summary
+summary(model)
+
+```
+
