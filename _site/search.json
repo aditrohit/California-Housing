@@ -7,18 +7,32 @@
     "text": "Data Source: The housing data used in these visualizations was sourced from Kaggle’s California Housing Prices dataset which includes demographic and real estate information for California districts.\nVisualization Tools: Graphs and maps were created using R with the tidyverse, ggplot2, and leaflet packages to deliver clear, interactive, and informative visual representations of California housing trends."
   },
   {
-    "objectID": "Map.html",
-    "href": "Map.html",
-    "title": "Map",
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "Model",
     "section": "",
-    "text": "This static map visualizes median house values across California using geographic coordinates. Each point represents a housing location, colored according to its median house value. A logarithmic color scale highlights variations more effectively, making clusters of high-value properties along the coast and the Bay Area more prominent. The visualization clearly shows that coastal regions, especially around San Francisco and Los Angeles, command significantly higher housing prices, emphasizing the geographic disparity in real estate valuation.\n\n\n\n\n\n\nThis interactive Leaflet map allows users to explore housing data across California dynamically. It samples 2,000 housing locations for performance and displays each one as a circle marker, color-coded by house value. Hovering or clicking reveals detailed popups with neighborhood names, median house values, and average household incomes. The map provides an intuitive, zoomable view of spatial trends in housing, making it easy to identify high-value clusters and compare different regions interactively."
+    "text": "This report presents a linear regression model designed to estimate California house values using four predictors:\n\naverage_household_income\naverage_house_age\ntotal_bedrooms\nocean_proximity\n\nWe use a cleaned dataset that excludes outliers above $2 million in value and ensures all predictors are positive. This model, while simple, performs surprisingly well when compared to professional valuation tools."
   },
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "My name is Adit Rohit and I am a rising freshman at Eastlake Highschool. Contact me at rohitkadit@gmail.com. My Github account can be visited here.\nThe repository for this project can be found here.\nThis project was created as part of Kane’s Data Science Bootcamp."
+    "objectID": "model.html#final-regression-equation",
+    "href": "model.html#final-regression-equation",
+    "title": "Model",
+    "section": "Final Regression Equation",
+    "text": "Final Regression Equation\nThe fitted linear model is:\n\\[\n\\text{HouseValue} =\n-487{,}732.48\n+ 7.39 \\cdot \\text{Income}\n+ 12{,}295.14 \\cdot \\text{Age}\n+ 145.09 \\cdot \\text{Bedrooms}\n- 67{,}571.69 \\cdot \\text{Inland}\n+ 120{,}789.33 \\cdot \\text{NearBay}\n+ 24{,}533.52 \\cdot \\text{NearOcean}\n\\]\nWhere: - Income = average household income in dollars\n- Age = house age in years (2025 - year built)\n- Bedrooms = total number of bedrooms\n- Ocean proximity indicators are binary (1 if the house belongs to the group, else 0)\n- &lt;1H OCEAN is the baseline category when all indicators are 0"
+  },
+  {
+    "objectID": "model.html#example-prediction",
+    "href": "model.html#example-prediction",
+    "title": "Model",
+    "section": "Example Prediction",
+    "text": "Example Prediction\nInputs:\n- Income = $350,000\n- Age = 48\n- Bedrooms = 4\n- Ocean Proximity = NEAR BAY\nPrediction:\n\\[\n\\text{HouseValue} = -487{,}732.48 + (7.39 \\cdot 350{,}000) + (12{,}295.14 \\cdot 48) + (145.09 \\cdot 4) + 120{,}789.33 = 2{,}810{,}304.93\n\\]\nSo the predicted house value is $2.81 million."
+  },
+  {
+    "objectID": "model.html#interpretation",
+    "href": "model.html#interpretation",
+    "title": "Model",
+    "section": "Interpretation",
+    "text": "Interpretation\n\nEvery $1 increase in income → +$7.39 in house value\n\nEvery additional year of age → +$12,295.14 in value\n\nEvery additional bedroom → +$145.09 in value\n\nCompared to &lt;1H OCEAN:\n\nINLAND homes are worth ~$67.6K less\n\nNEAR BAY homes are worth ~$120.8K more\n\nNEAR OCEAN homes are worth ~$24.5K more"
   },
   {
     "objectID": "index.html",
@@ -28,6 +42,20 @@
     "text": "This project explores California’s housing market using a cleaned dataset containing neighborhood-level statistics on income, home values, and geographic location. Through interactive and static visualizations, it examines how factors like average household income, proximity to the ocean, and geographic coordinates relate to median house prices. The analysis uses R and visualization tools like ggplot2 and Leaflet to uncover spatial and economic patterns, offering insights into the forces shaping housing affordability and regional disparities across California.\n\n\n\n\n\n\n\n\n\nThis scatter plot visualizes the relationship between average household income and median house value across California. Each point represents a housing block, with orange markers indicating individual observations. The graph reveals a positive correlation—areas with higher household incomes generally tend to have higher median house values. However, the spread in values also suggests that income alone does not fully explain housing prices, pointing to other influential factors such as location, proximity to urban centers, or coastal access. This visualization helps highlight the economic diversity and housing market disparities within the state."
   },
   {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "My name is Adit Rohit and I am a rising freshman at Eastlake Highschool. Contact me at rohitkadit@gmail.com. My Github account can be visited here.\nThe repository for this project can be found here.\nThis project was created as part of Kane’s Data Science Bootcamp."
+  },
+  {
+    "objectID": "Map.html",
+    "href": "Map.html",
+    "title": "Map",
+    "section": "",
+    "text": "This static map visualizes median house values across California using geographic coordinates. Each point represents a housing location, colored according to its median house value. A logarithmic color scale highlights variations more effectively, making clusters of high-value properties along the coast and the Bay Area more prominent. The visualization clearly shows that coastal regions, especially around San Francisco and Los Angeles, command significantly higher housing prices, emphasizing the geographic disparity in real estate valuation.\n\n\n\n\n\n\nThis interactive Leaflet map allows users to explore housing data across California dynamically. It samples 2,000 housing locations for performance and displays each one as a circle marker, color-coded by house value. Hovering or clicking reveals detailed popups with neighborhood names, median house values, and average household incomes. The map provides an intuitive, zoomable view of spatial trends in housing, making it easy to identify high-value clusters and compare different regions interactively."
+  },
+  {
     "objectID": "Ocean_Proximity.html",
     "href": "Ocean_Proximity.html",
     "title": "Ocean Proximity",
@@ -35,38 +63,38 @@
     "text": "This boxplot explores how proximity to the ocean affects median house values in California. Properties are grouped into categories like “Near Bay”, “Inland”, and “Near Ocean”, with the boxes showing the distribution of house prices within each group. As expected, homes closer to the coast—particularly those “Near Bay” or “Near Ocean”—tend to have higher median values, while inland homes are generally more affordable. The jittered points overlay adds a layer of raw data visibility, confirming that coastal proximity correlates strongly with elevated housing prices.\n\nThe animation illustrates how median house value changes in relation to the average age of houses, evolving over different levels of ocean proximity or income bands (depending on how the animation was constructed). As the frames shift, patterns emerge showing how newer or older developments in various regions align with housing costs. The motion highlights trends over time or across categories, providing dynamic insight that complements the static graphs."
   },
   {
-    "objectID": "model.html",
-    "href": "model.html",
+    "objectID": "model.html#introduction",
+    "href": "model.html#introduction",
     "title": "Model",
     "section": "",
-    "text": "Call:\nlm(formula = median_house_value ~ average_household_income + \n    average_house_age + ocean_proximity, data = housing_clean)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-721614 -139275  -34274   92332 1458432 \n\nCoefficients:\n                            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)               -3.344e+05  9.244e+03 -36.180  &lt; 2e-16 ***\naverage_household_income   6.998e+00  5.602e-02 124.919  &lt; 2e-16 ***\naverage_house_age          1.066e+04  2.141e+02  49.818  &lt; 2e-16 ***\nocean_proximityINLAND     -6.458e+04  3.782e+03 -17.076  &lt; 2e-16 ***\nocean_proximityNEAR BAY    1.284e+05  6.397e+03  20.080  &lt; 2e-16 ***\nocean_proximityNEAR OCEAN  3.286e+04  4.977e+03   6.603 4.13e-11 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 221800 on 21429 degrees of freedom\nMultiple R-squared:  0.5083,    Adjusted R-squared:  0.5082 \nF-statistic:  4431 on 5 and 21429 DF,  p-value: &lt; 2.2e-16"
+    "text": "This report presents a linear regression model designed to estimate California house values using four predictors:\n\naverage_household_income\naverage_house_age\ntotal_bedrooms\nocean_proximity\n\nWe use a cleaned dataset that excludes outliers above $2 million in value and ensures all predictors are positive. This model, while simple, performs surprisingly well when compared to professional valuation tools."
   },
   {
-    "objectID": "model.html#final-regression-equation",
-    "href": "model.html#final-regression-equation",
+    "objectID": "model.html#example-prediction-milpitas-home",
+    "href": "model.html#example-prediction-milpitas-home",
     "title": "Model",
-    "section": "Final Regression Equation",
-    "text": "Final Regression Equation\nThe fitted linear model is:\n\\[\n\\text{HouseValue} =\n-334{,}429.74\n+ 7.00 \\cdot \\text{Income}\n+ 10{,}664.29 \\cdot \\text{Age}\n- 64{,}580.69 \\cdot \\text{Inland}\n+ 128{,}444.13 \\cdot \\text{NearBay}\n+ 32{,}864.60 \\cdot \\text{NearOcean}\n\\]\nWhere: - Income = average_household_income (in dollars)\n- Age = average_house_age (in years)\n- Inland, NearBay, and NearOcean are binary variables:\n- 1 if the house is in that region, else 0\n- The baseline is &lt;1H OCEAN"
+    "section": "Example Prediction: Milpitas Home",
+    "text": "Example Prediction: Milpitas Home\n\nProperty Info (from Redfin):\n\nLocation: 1570 Hidden Creek Ln, Milpitas, CA\nAge: 2025 - 1989 = 36 years\nBedrooms: 4\nOcean Proximity: NEAR BAY\nEstimated Income: $275,000\n\n\n\nPrediction:\n\\[\n\\text{HouseValue} = -487{,}732.48 + (7.39 \\cdot 275{,}000) + (12{,}295.14 \\cdot 36) + (145.09 \\cdot 4) + 120{,}789.33 = 2{,}108{,}512.15\n\\]\n📍 Estimated Value: $2.11 million\n🏠 Redfin Estimate: $2.3M – $2.6M\n✅ Your model is within ~8% of the real-world estimate."
   },
   {
-    "objectID": "model.html#example-prediction",
-    "href": "model.html#example-prediction",
+    "objectID": "model.html#model-accuracy",
+    "href": "model.html#model-accuracy",
     "title": "Model",
-    "section": "Example Prediction",
-    "text": "Example Prediction\nSuppose a house has: - Income = $90,000\n- Age = 30 years\n- Ocean proximity = “NEAR BAY” (i.e., NearBay = 1)\nThen:\n\\[\n\\text{HouseValue} =\n-334{,}429.74 + (7.00 \\cdot 90{,}000) + (10{,}664.29 \\cdot 30) + 128{,}444.13\n= 1{,}191{,}701.59\n\\]"
+    "section": "Model Accuracy",
+    "text": "Model Accuracy\n\nR² ≈ 0.56 → model explains ~56% of variance in house prices\n\nRMSE ≈ $209K → average prediction error\n\nPerforms surprisingly well given its simplicity and limited features"
   },
   {
-    "objectID": "model.html#interpretation",
-    "href": "model.html#interpretation",
+    "objectID": "model.html#d-visualization",
+    "href": "model.html#d-visualization",
     "title": "Model",
-    "section": "Interpretation",
-    "text": "Interpretation\n\nEvery $1 increase in income → +$7 in house value\n\nEvery additional year of age → +$10,664.29 in value\n\nCompared to &lt;1H OCEAN:\n\nINLAND homes are worth ~$64.6K less\n\nNEAR BAY homes are worth ~$128.4K more\n\nNEAR OCEAN homes are worth ~$32.8K more"
+    "section": "3D Visualization",
+    "text": "3D Visualization"
   },
   {
-    "objectID": "model.html#limitations",
-    "href": "model.html#limitations",
+    "objectID": "model.html#conclusion",
+    "href": "model.html#conclusion",
     "title": "Model",
-    "section": "Limitations",
-    "text": "Limitations\n\nModel only includes three predictors\n\nR² is modest → use for rough estimation only\n\nAdding variables (e.g., total rooms, location coordinates) may improve accuracy\n\n\n`"
+    "section": "Conclusion",
+    "text": "Conclusion\nEven with just four features, this model predicts house values within ~$150K of professional tools like Redfin. It demonstrates the power of regression models and can be extended with more granular property features like square footage, location coordinates, or renovation status for even better accuracy.\nThis project can serve as a foundation for building real-estate pricing tools, dashboards, or ML-powered decision support systems."
   }
 ]
