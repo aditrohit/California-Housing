@@ -32,7 +32,7 @@
     "href": "model.html#example-prediction-milpitas-home",
     "title": "Model",
     "section": "Example Prediction: Milpitas Home",
-    "text": "Example Prediction: Milpitas Home\n\nProperty Info (from Redfin):\n\nLocation: 1570 Hidden Creek Ln, Milpitas, CA\nAge: 2025 - 1989 = 36 years\nBedrooms: 4\nOcean Proximity: NEAR BAY\nEstimated Income: $275,000\n\n\n\nPrediction:\n\\[\n\\text{HouseValue} = -487{,}732.48 + (7.39 \\cdot 275{,}000) + (12{,}295.14 \\cdot 36) + (145.09 \\cdot 4) + 120{,}789.33 = 2{,}108{,}512.15\n\\]\n📍 Estimated Value: $2.11 million\n🏠 Redfin Estimate: $2.3M – $2.6M\n✅ Your model is within ~8% of the real-world estimate."
+    "text": "Example Prediction: Milpitas Home\n\nProperty Info (from Redfin):\n\nLocation: 1570 Hidden Creek Ln, Milpitas, CA\nAge: 2025 - 1989 = 36 years\nBedrooms: 4\nOcean Proximity: NEAR BAY\nEstimated Income: $275,000\n\n\n\nPrediction:\n\\[\n\\text{HouseValue} = -487{,}732.48 + (7.39 \\cdot 275{,}000) + (12{,}295.14 \\cdot 36) + (145.09 \\cdot 4) + 120{,}789.33 = 2{,}108{,}512.15\n\\]\n📍 Estimated Value: $2.11 million\n🏠 Redfin Estimate: $2M – $2.3M\n✅ Model is within ~8% of the real-world estimate."
   },
   {
     "objectID": "model.html#model-accuracy",
